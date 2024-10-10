@@ -91,9 +91,9 @@ h2{
 
 .info-row {
     display: flex;
-    justify-content: space-between; /* 양쪽으로 배치 */
-    gap: 40px; /* info-item 사이 간격을 넓힘 */
-    margin-bottom: 20px; /* 각 행 간의 간격을 더 넓힘 */
+    justify-content: space-between;
+    gap: 40px; 
+    margin-bottom: 20px; 
 }
 
 .info-item {
@@ -108,7 +108,7 @@ label {
 }
 
 input {
-    width: 95%; /* 양쪽 크기 맞춤 */
+    width: 95%; 
     padding: 12px;
     font-size: 14px;
     border: 1px solid #e0e0e0;
@@ -297,7 +297,7 @@ footer {
     color: #333; 
 }
 
-/* 회원탈퇴, 회원정보수정 버튼 스타일 */
+
 .withdrawal-section {
     display: flex;
     justify-content: end;
@@ -315,7 +315,7 @@ footer {
 }
 
 .withdrawal-button {
-    margin-left: 10px; /* 오른쪽 끝으로 정렬 */
+    margin-left: 10px; 
 }
 
 .useredit-button:hover, .withdrawal-button:hover {
