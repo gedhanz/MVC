@@ -1,0 +1,49 @@
+
+        .A {
+            background-image: url("../images/pexels-pixabay-219692.jpg");
+            width: 1900px;
+            height: 500px;
+            border: 1px solid black;
+            background-position: center;
+            background-size: cover;
+        }
+        .B {
+            color: aliceblue;
+            margin-top: 200px;
+            margin-left: 250px;
+        }
+        .tab {
+            background-color: white;
+            width: 1000px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 15px;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-button.active {
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+        }
+        .search-bar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .search-dates {
+            
+        }
+    
+
+        
+    
