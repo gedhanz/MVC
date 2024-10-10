@@ -148,7 +148,7 @@ label {
     text-align: left;
 }
 
-input, select {
+input {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -156,7 +156,7 @@ input, select {
     border-radius: 5px;
 }
 
-input:focus, select:focus {
+input:focus {
     border-color: #ffeeee;
     outline: none;
 }

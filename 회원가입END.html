@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" type="image/png">
 </head>
-<!-- 헤더 영역 -->
+<body>
+    <!-- 헤더 영역 -->
 <header class="header">
     <div class="logo">
         <a href="/">
@@ -22,7 +23,6 @@
     </nav>
   </header>
   <!-- 바디 영역 -->
-<body>
     <div class="signup-container">
         <h1>회원가입</h1>
         <form class="signup-form">
@@ -54,20 +54,11 @@
                 <label for="birthdate">생년월일</label>
                 <input type="text" id="birthdate" name="birthdate" placeholder="ex: 930818" pattern="\\d{6}" maxlength="6" required>
             </div>
-            <div class="input-group">
-                <label for="gender">성별</label>
-                <select id="gender" name="gender" required>
-                    <option value="">성별 선택</option>
-                    <option value="male">남성</option>
-                    <option value="female">여성</option>
-                </select>
-            </div>
             <button type="submit" class="signup-btn">회원가입</button>
         </form>
         <p class="login-link"><a href="../html/로그인END.html">로그인페이지로 돌아가기</a></p>
-    </div>       
-</body>
-<!-- 푸터 영역 -->
+    </div>     
+    <!-- 푸터 영역 -->
 <footer>
     <div class="footer-container">
         <div class="footer-section">
@@ -128,4 +119,5 @@
         <p style="margin-top: 20px;"> COPYRIGHT(C) HBILAB. ALL RIGHTS RESERVED.</p>
     </div>
 </footer>   
+</body> 
 </html>
