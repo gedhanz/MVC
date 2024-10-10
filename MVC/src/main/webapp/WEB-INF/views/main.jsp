@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" type="image/png">
 </head>
-
-<body>
+<% String nickname = (String)session.getAttribute("nickname"); %>
 <!-- 헤더 영역 -->
 <header class="header">
   <div class="logo">
@@ -21,31 +20,13 @@
       </a>
   </div>
   <nav class="nav">
+  	  <%if(nickname != null) {%> <%=nickname %>님 환영합니다 <%} %>
       <a href="#" class="heart-link"><i class="fas fa-heart"></i></a>
-      <a href="#" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
+      <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
   </nav>
 </header>
 <!-- 바디 영역 -->
-<section class="login">
-  <div class="login-container">
-    <h1 style="color: black;">로그인</h1>
-      <form action="${pageContext.request.contextPath}/login" method="post">
-          <div class="input-group">
-              <label for="id">아이디<span class="required">*</span></label>
-              <input type="id" id="id" name="id" placeholder="아이디를 입력해주세요." required>
-          </div>
-          <div class="input-group">
-              <label for="password">비밀번호<span class="required">*</span></label>
-              <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
-          </div>
-          <button type="submit" class="login-btn">로그인</button>
-      </form>
-      <div class="signup-option">
-          계정이 없으신가요?<br> <div class="signfont"><a href="../html/회원가입END.html">회원가입</a></div>
-      </div>
-  </div>
-</section>        
-</body>
+
 <!-- 푸터 영역 -->
 <footer>
   <div class="footer-container">

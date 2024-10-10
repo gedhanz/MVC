@@ -16,6 +16,6 @@ public class AcornStayMainServlet extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
-		req.getRequestDispatcher("WEB-INF/views/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp);
 	}
 }
