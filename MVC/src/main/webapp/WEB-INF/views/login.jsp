@@ -6,30 +6,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AcornStay | 로그인</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css" />
+    <link rel="stylesheet" href="/MVC/resources/css/login.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" type="image/png">
 </head>
 
 <body>
+<% String nickname = (String)session.getAttribute("nickname"); %>
 <!-- 헤더 영역 -->
 <header class="header">
   <div class="logo">
-      <a href="/">
+      <a href="/MVC/main">
           <img src="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" alt="Acorn Stay Logo">
           <span class="logo-text"><span style="color: #1a1d60d4;">Acorn</span>Stay</span>
       </a>
   </div>
   <nav class="nav">
-      <a href="#" class="heart-link"><i class="fas fa-heart"></i></a>
-      <a href="#" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
+  	  <%if(nickname != null) {%> <%=nickname %>님 환영합니다 <%} %>
+  	  <% if(nickname == null){%>
+	  <a href="/MVC/register" class="heart-link"><i class="fas fa-heart"></i></a>
+      <% }%>
+  	  
+  	  <% if(nickname == null){%>
+	  <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
+      <% }else{ %>
+      <a href="/MVC/logout" class="mypage-button"><i class="fa-regular fa-user"></i> 로그아웃</a>
+      <% } %>
   </nav>
 </header>
 <!-- 바디 영역 -->
 <section class="login">
   <div class="login-container">
     <h1 style="color: black;">로그인</h1>
-      <form action="${pageContext.request.contextPath}/login" method="post">
+      <form action="/MVC/login" method="post">
           <div class="input-group">
               <label for="id">아이디<span class="required">*</span></label>
               <input type="id" id="id" name="id" placeholder="아이디를 입력해주세요." required>
@@ -41,7 +50,7 @@
           <button type="submit" class="login-btn">로그인</button>
       </form>
       <div class="signup-option">
-          계정이 없으신가요?<br> <div class="signfont"><a href="../html/회원가입END.html">회원가입</a></div>
+          계정이 없으신가요?<br> <div class="signfont"><a href="/MVC/register">회원가입</a></div>
       </div>
   </div>
 </section>        

@@ -7,17 +7,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
-public class AcornStayLoginServlet extends HttpServlet{
-	
+@WebServlet("/register")
+public class AcornStayRegisterServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
-		req.getRequestDispatcher("WEB-INF/views/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("WEB-INF/views/register.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -27,19 +25,22 @@ public class AcornStayLoginServlet extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
-        String id = req.getParameter("id");
-        String password = req.getParameter("password");
-
-        AcornStayUserDAO aDao = new AcornStayUserDAO();
-        if (aDao.loginCheck(id, password)) {
-        	HttpSession session = req.getSession();
-            session.setAttribute("nickname", aDao.findNickname(id));
-        	resp.sendRedirect("/MVC/main");
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		String name = req.getParameter("name");
+		String birthdate = req.getParameter("birthdate");
+		String phone = req.getParameter("phone");
+		String nickname = req.getParameter("nickname");
+		
+		AcornStayUserDTO dto = new AcornStayUserDTO(username, password, name, birthdate, phone, nickname);
+		
+		AcornStayRegisterDAO dao = new AcornStayRegisterDAO();
+		int result = dao.register(dto);
+		if (result > 0) {
+			resp.sendRedirect("/MVC/main");
 		}else {
-			
-			resp.sendRedirect("/MVC/login");
+			resp.sendRedirect("/MVC/register");
 		}
-        
-        
+		
 	}
 }
