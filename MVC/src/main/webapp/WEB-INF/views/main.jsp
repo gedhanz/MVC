@@ -1,3 +1,6 @@
+<%@page import="AcornStay.AcornStayAccommodationDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="AcornStay.AcornStayAccommodationDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AcornStay | 로그인</title>
-    <link rel="stylesheet" href="/MVC/resources/css/login.css" />
+    <link rel="stylesheet" href="/MVC/resources/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" type="image/png">
 </head>
@@ -33,7 +36,62 @@
   </nav>
 </header>
 <!-- 바디 영역 -->
-
+<%
+AcornStayAccommodationDAO dao = new AcornStayAccommodationDAO();
+ArrayList<AcornStayAccommodationDTO> list = dao.getAllAccommodations();
+%>
+<section class="css-13u51kw">
+      <div class="css-1qumol3">
+        <div class="css-1psit91">
+          <div class="gc-dropdown css-1d6k3ca">
+            <div role="presentation" class="css-1kpnpdw">
+              <span class="css-h60ep5">추천순</span>
+              <div class="css-1nq7xnt">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.406 8.016L10 13.02 14.608 8 16 9.402s-3.817 4.225-4.594 5.007a1.978 1.978 0 01-2.812 0L4 9.422l1.406-1.406z" fill="current"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% for(AcornStayAccommodationDTO dto : list) { %>
+        <a target="_blank" class="gc-thumbnail-type-seller-card css-wels0m" href="/MVC/detail?id=<%=dto.getId()%>">
+          <div class="css-gvoll6">
+            <div class="css-7xiv94">
+              <div class="css-nl3cnv">
+                <img alt="" sizes="100vw" src="<%=dto.getImage() %>" decoding="async" data-nimg="fill" class="thumbnail-image desktop:hover:bg-backgroundOverlayDarkInactive" loading="lazy" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+              </div>
+            </div>
+            <div class="css-1by0ap6">
+              <div class="css-b0qdn7">
+                <div class="css-8fn780">
+                  <h3 class="gc-thumbnail-type-seller-card-title css-1asqkxl"><%=dto.getName() %></h3>
+                </div>
+                <div class="css-19li9i9"><span class="css-ki0lqh"><%=dto.getRegion() %></span></div>
+                <div class="css-1ar2n2o">
+                  <div class="css-wtzmcu">
+                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-q6whag">
+                      <path d="M14.229 12.1l.853 3.91c.06.502-.069.896-.386 1.18-.434.39-.958.352-1.294.21-.209-.114-1.343-.813-3.404-2.095-2.061 1.282-3.196 1.981-3.404 2.096-.336.14-.86.18-1.295-.211-.317-.284-.445-.678-.386-1.18l.853-3.91-.004-.003.001-.003c-1.817-1.651-2.806-2.56-2.965-2.724-.247-.267-.403-.786-.215-1.309.188-.523.671-.746.954-.78.19-.021 1.472-.146 3.848-.373H7.38c.965-2.358 1.49-3.621 1.576-3.791.128-.255.54-.617 1.042-.617s.864.332 1.018.573c.1.198.634 1.477 1.6 3.835 2.375.227 3.658.352 3.847.374.283.033.766.256.954.78.188.522.032 1.04-.215 1.308-.16.165-1.15 1.074-2.969 2.727l-.004.003z" fill="current"></path>
+                    </svg>
+                    <span class="css-9ml4lz"><%=dto.getRate() %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="css-sg6wi7">
+      			<div>
+        			<div class="css-ukl1fa">
+          				<div class="css-1dzt3ch">
+            				<div class="css-xgwoxj"><%=dto.getPrice() %>원</div>
+          				</div>
+        			</div>
+      			</div>
+    		</div>
+            </div>
+          </div>
+        </a>
+        <%} %>
+      </div>
+    </section>
 <!-- 푸터 영역 -->
 <footer>
   <div class="footer-container">
