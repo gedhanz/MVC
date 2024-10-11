@@ -1,6 +1,7 @@
 package AcornStay;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -85,6 +86,72 @@ public class AcornStayAccommodationDAO {
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				list.add(new AcornStayAccommodationImageDTO(rs.getInt(1),rs.getInt(2),rs.getString(3)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<AcornStayAccommodationDTO> search(String region, int guestCount, Date checkIn, Date checkOut) {
+		Connection connection = dbCon();
+		String sql = "SELECT * FROM accommodations_mvc a " +
+                "LEFT JOIN reservations_mvc r ON a.accommodation_id = r.accommodation_id " +
+                "WHERE a.region = ? " +
+                "AND a.max_occupancy >= ? " +
+                "AND (r.accommodation_id IS NULL " +
+                "OR (r.check_in > ? OR r.check_out < ?))";
+		ArrayList<AcornStayAccommodationDTO> list = new ArrayList<AcornStayAccommodationDTO>();
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setString(1, region);
+            pst.setInt(2, guestCount);
+            pst.setDate(3, checkOut);  
+            pst.setDate(4, checkIn);   
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				list.add(new AcornStayAccommodationDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getFloat(5),rs.getInt(6),rs.getString(7),rs.getString(8)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<AcornStayAccommodationDTO> sortSearch(String region, int guestCount, Date checkIn, Date checkOut, String sortBy) {
+		Connection connection = dbCon();
+		String sql = "SELECT * FROM accommodations_mvc a " +
+                "LEFT JOIN reservations_mvc r ON a.accommodation_id = r.accommodation_id " +
+                "WHERE a.region = ? " +
+                "AND a.max_occupancy >= ? " +
+                "AND (r.accommodation_id IS NULL " +
+                "OR (r.check_in > ? OR r.check_out < ?))";
+		switch (sortBy) {
+        case "price_asc":
+            sql += " ORDER BY a.price ASC";
+            break;
+        case "price_desc":
+            sql += " ORDER BY a.price DESC";
+            break;
+        case "rating_desc":
+            sql += " ORDER BY a.average_rating DESC";
+            break;
+        default:
+            sql += " ORDER BY a.accommodation_name";  // 기본순
+            break;
+		}
+		ArrayList<AcornStayAccommodationDTO> list = new ArrayList<AcornStayAccommodationDTO>();
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setString(1, region);
+            pst.setInt(2, guestCount);
+            pst.setDate(3, checkOut);  
+            pst.setDate(4, checkIn);   
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				list.add(new AcornStayAccommodationDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getFloat(5),rs.getInt(6),rs.getString(7),rs.getString(8)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

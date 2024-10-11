@@ -1,6 +1,7 @@
 package AcornStay;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,11 @@ public class AcornStayMainServlet extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
-		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp);
+		AcornStayAccommodationDAO dao = new AcornStayAccommodationDAO();
+		ArrayList<AcornStayAccommodationDTO> list = dao.getAllAccommodations();
+		
+		req.setAttribute("list", list);
+		
+		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp); 
 	}
 }
