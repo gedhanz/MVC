@@ -1,5 +1,112 @@
 @charset "UTF-8";
-        /* 헤더 영역 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.mypage-section {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.mypage-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 220px;
+    background-color: #ffffff;
+    border-right: 1px solid #e5e5e5;
+    padding: 30px;
+    padding-top: 50px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 16px;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar ul li a.active {
+    background-color: #4ab1f6;
+    color: white;
+    font-weight: bold;
+}
+
+/* 메인 콘텐츠 */
+.content {
+    flex: 1;
+    padding: 40px;
+}
+
+.content-header h1 {
+    font-size: 25px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.reservation-history {
+    margin-top: 20px;
+}
+
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.reservation-item {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-info p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.reservation-img{
+    width: 230px;
+    height: 160px;
+    border-radius: 20px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+/* 헤더 영역 */
 body {
   margin: 0;
   padding: 0;
@@ -129,42 +236,9 @@ body {
   color: black;
 }
 
-/* 메인 */
-.main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: calc(100vh - 200px);
-    text-align: center;
-    padding-top: 200px;
-    padding-bottom: 200px;
-}
-.main-content h1 {
-    color: #00aef0;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
 
-.main-content p {
-    font-size: 16px;
-    margin-bottom: 30px;
-}
 
-.main-content a {
-    text-decoration: none;
-    color: white;
-    background-color: #00aef0;
-    padding: 15px 30px;
-    border-radius: 10px;
-    font-weight: bold;
-}
-
-.main-content a:hover {
-    background-color: #008fcc;
-}
-
-/* 푸터 */
+/* 푸터 영역 */
 html, body {
     margin: 0;
     padding: 0;

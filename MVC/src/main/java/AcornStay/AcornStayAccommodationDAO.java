@@ -101,7 +101,8 @@ public class AcornStayAccommodationDAO {
                 "WHERE a.region = ? " +
                 "AND a.max_occupancy >= ? " +
                 "AND (r.accommodation_id IS NULL " +
-                "OR (r.check_in > ? OR r.check_out < ?))";
+                "OR (r.check_in > ? OR r.check_out < ?))" +
+                "ORDER BY a.accommodation_name";
 		ArrayList<AcornStayAccommodationDTO> list = new ArrayList<AcornStayAccommodationDTO>();
 		try {
 			PreparedStatement pst = connection.prepareStatement(sql);

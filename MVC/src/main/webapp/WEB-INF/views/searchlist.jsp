@@ -61,7 +61,7 @@ if(sortBy.equals("default")){
         <div class="css-1psit91">
           <div class="gc-dropdown css-1d6k3ca">
             <div role="presentation" class="css-1kpnpdw" id="toggleButton">
-              <span class="css-h60ep5">기본순</span>
+              <span class="css-h60ep5"><%=sortByName %></span>
               <div class="css-1nq7xnt">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.406 8.016L10 13.02 14.608 8 16 9.402s-3.817 4.225-4.594 5.007a1.978 1.978 0 01-2.812 0L4 9.422l1.406-1.406z" fill="current"></path>
