@@ -1,0 +1,109 @@
+CREATE TABLE users_mvc (
+    user_id VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    phone_number VARCHAR(20) UNIQUE,
+    nickname VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE SEQUENCE review_seq
+START WITH 1
+INCREMENT BY 1;
+
+
+CREATE TABLE reviews_mvc (
+    review_id NUMBER PRIMARY KEY,
+    nickname VARCHAR(50),
+    accommodation_id NUMBER,
+    review_date DATE NOT NULL,
+    rating NUMBER CHECK (rating >= 1 AND rating <= 5),
+    review_text CLOB,
+    FOREIGN KEY (nickname) REFERENCES users_mvc(nickname),
+    FOREIGN KEY (accommodation_id) REFERENCES accommodations_mvc(accommodation_id)
+);
+
+CREATE OR REPLACE TRIGGER trg_reviews_id
+BEFORE INSERT ON reviews_mvc
+FOR EACH ROW
+BEGIN
+  :NEW.review_id := review_seq.NEXTVAL;
+END;
+
+CREATE SEQUENCE accommodation_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TABLE accommodations_mvc (
+    accommodation_id NUMBER PRIMARY KEY,
+    region VARCHAR(50) NOT NULL,
+    detailed_location VARCHAR(255) NOT NULL,
+    price NUMBER NOT NULL,
+    average_rating FLOAT DEFAULT 0,
+    max_occupancy NUMBER NOT NULL,
+    accommodation_name VARCHAR(100) NOT NULL,
+    image VARCHAR(255)
+);
+
+CREATE OR REPLACE TRIGGER trg_accommodations_id
+BEFORE INSERT ON accommodations_mvc
+FOR EACH ROW
+BEGIN
+  :NEW.accommodation_id := accommodation_seq.NEXTVAL;
+END;
+
+CREATE SEQUENCE reservation_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TABLE reservations_mvc (
+    reservation_id NUMBER PRIMARY KEY,
+    accommodation_id NUMBER,
+    user_id VARCHAR(50),
+    nickname VARCHAR(50),
+    check_in DATE NOT NULL,
+    check_out DATE NOT NULL,
+    price NUMBER NOT NULL,
+    number_of_people NUMBER NOT NULL,
+    FOREIGN KEY (accommodation_id) REFERENCES accommodations_mvc(accommodation_id),
+    FOREIGN KEY (user_id) REFERENCES users_mvc(user_id),
+    FOREIGN KEY (nickname) REFERENCES users_mvc(nickname)
+);
+
+CREATE OR REPLACE TRIGGER trg_reservations_id
+BEFORE INSERT ON reservations_mvc
+FOR EACH ROW
+BEGIN
+  :NEW.reservation_id := reservation_seq.NEXTVAL;
+END;
+
+INSERT INTO users_mvc VALUES ('user001', 'password123', 'Alice Kim', TO_DATE('1990-05-15', 'YYYY-MM-DD'), '010-1234-5678', 'Alice');
+INSERT INTO users_mvc VALUES ('user002', 'password456', 'Bob Lee', TO_DATE('1988-11-23', 'YYYY-MM-DD'), '010-2345-6789', 'Bob');
+INSERT INTO users_mvc VALUES ('user003', 'password789', 'Charlie Park', TO_DATE('1995-02-05', 'YYYY-MM-DD'), '010-3456-7890', 'Charlie');
+INSERT INTO users_mvc VALUES ('user004', 'password321', 'Diana Choi', TO_DATE('1985-07-30', 'YYYY-MM-DD'), '010-4567-8901', 'Diana');
+INSERT INTO users_mvc VALUES ('user005', 'password654', 'Ethan Jeong', TO_DATE('1992-09-18', 'YYYY-MM-DD'), '010-5678-9012', 'Ethan');
+
+INSERT INTO accommodations_mvc VALUES (1, 'Seoul', 'Gangnam-gu, Teheran-ro 123', 150000, 4.5, 4, 'image1.jpg', 'Luxury Gangnam Apartment');
+INSERT INTO accommodations_mvc VALUES (2, 'Busan', 'Haeundae, Beach Road 456', 200000, 4.7, 6, 'image2.jpg', 'Beachfront Haeundae Resort');
+INSERT INTO accommodations_mvc VALUES (3, 'Incheon', 'Songdo, Central Park 789', 120000, 4.2, 2, 'image3.jpg', 'Songdo Central Park Studio');
+INSERT INTO accommodations_mvc VALUES (4, 'Jeju', 'Seogwipo, Olle Road 12', 180000, 4.8, 5, 'image4.jpg', 'Jeju Ocean View Villa');
+INSERT INTO accommodations_mvc VALUES (5, 'Gyeongju', 'Bomun, Historic Site 345', 100000, 4.3, 3, 'image5.jpg', 'Gyeongju Historic Stay');
+
+commit;
+
+select * from users_mvc;
+
+select * from accommodations_mvc;
+
+update users_mvc set name = '최형진' where user_id = '111';
+
+drop table users_mvc;
+drop table reviews_mvc;
+drop table accommodations_mvc;
+drop table reservations_mvc;
+
+delete from users_mvc where user_id = '111';
+
+commit;
+
+SELECT * FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET';
