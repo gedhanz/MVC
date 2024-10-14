@@ -37,7 +37,7 @@ public class AcornStayRegisterServlet extends HttpServlet{
 		AcornStayRegisterDAO dao = new AcornStayRegisterDAO();
 		int result = dao.register(dto);
 		if (result > 0) {
-			resp.sendRedirect("/MVC/main");
+			resp.sendRedirect("/MVC/success");
 		}else {
 			resp.sendRedirect("/MVC/register");
 		}

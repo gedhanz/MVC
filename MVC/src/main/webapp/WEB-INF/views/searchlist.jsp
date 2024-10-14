@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/MVC/resources/css/searchlist.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" type="image/png">
+    
 </head>
 <% String nickname = (String)session.getAttribute("nickname"); %>
 <!-- 헤더 영역 -->
@@ -44,22 +45,30 @@ Date checkIn = (Date)request.getAttribute("check_in");
 Date checkOut = (Date)request.getAttribute("check_out");
 int guest = (int)request.getAttribute("guest");
 String sortBy = (String)request.getAttribute("sort_by");
+String sortByName = null;
+if(sortBy.equals("default")){
+	sortByName = "기본순";
+}else if(sortBy.equals("rating_desc")){
+	sortByName = "평점높은순";
+}else if(sortBy.equals("price_asc")){
+	sortByName = "낮은가격순";
+}else{
+	sortByName = "높은가격순";
+}
 %>
 <section class="css-13u51kw">
       <div class="css-1qumol3">
         <div class="css-1psit91">
           <div class="gc-dropdown css-1d6k3ca">
-            <div role="presentation" class="css-1kpnpdw">
-              <span class="css-h60ep5">추천순</span>
+            <div role="presentation" class="css-1kpnpdw" id="toggleButton">
+              <span class="css-h60ep5">기본순</span>
               <div class="css-1nq7xnt">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.406 8.016L10 13.02 14.608 8 16 9.402s-3.817 4.225-4.594 5.007a1.978 1.978 0 01-2.812 0L4 9.422l1.406-1.406z" fill="current"></path>
                 </svg>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="css-none" style="position: absolute; inset: 0px 0px auto auto; z-index: 1; transform: translate(0px, 22px);" 
+            <div class="css-none" style="position: absolute; inset: 0px 0px auto auto; z-index: 1; transform: translate(0px, 22px);" 
             data-popper-reference-hidden="false" data-popper-escaped="false" data-popper-placement="bottom-end" id="dropdownMenu">
               <ul class="css-1jqt3fa">
                 <a href="/MVC/search?region=<%= region %>&check_in=<%= checkIn %>&check_out=<%= checkOut %>&guest=<%= guest %>&sort_by=default">
@@ -84,6 +93,9 @@ String sortBy = (String)request.getAttribute("sort_by");
                 </a>
               </ul>
             </div>
+          </div>
+        </div>
+        
         <% for(AcornStayAccommodationDTO dto : list) { %>
         <a target="_blank" class="gc-thumbnail-type-seller-card css-wels0m" href="/MVC/detail?id=<%=dto.getId()%>">
           <div class="css-gvoll6">

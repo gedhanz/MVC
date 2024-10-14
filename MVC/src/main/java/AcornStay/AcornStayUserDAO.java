@@ -76,4 +76,20 @@ public class AcornStayUserDAO {
 		return nickname;
 	}
 	
+	public void deleteID(String id) {
+		Connection connection = dbCon();
+		String sql = "delete from users_mvc where user_id = ?";
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				System.out.println("delete ok");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

@@ -1,50 +1,14 @@
-<%@page import="AcornStay.AcornStayAccommodationDTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="AcornStay.AcornStayAccommodationDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcornStay | 회원탈퇴가 완료되었습니다.</title>
+    <link rel="stylesheet" href="/MVC/resources/css/deleteID.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" type="image/png">
-    <link rel="stylesheet" href="/MVC/resources/css/main.css" />
-    <title>AcornStay | 메인</title>
-
-
-
-<script>
-    function setMinEndDate() {
-        const startDate = document.getElementById('start-date').value;
-        const endDateInput = document.getElementById('end-date');
-        endDateInput.min = startDate; // 종료일의 최소값을 시작일로 설정
-    }
-
-    // 랜덤 배경 이미지 변경 기능
-    const images = [
-        "../image/mainphoto1.jpg",
-        "../image/mainphoto2.jpg",
-        "../image/mainphoto3.jpg",
-        "../image/mainphoto4.jpg"
-    ];
-
-    function setRandomBackgroundImage() {
-        const randomIndex = Math.floor(Math.random() * images.length);
-        const mainBackground = document.querySelector('.Main_background_img');
-        mainBackground.style.backgroundImage = `url('${images[randomIndex]}')`;
-        mainBackground.style.backgroundSize = 'cover';
-        mainBackground.style.backgroundPosition = 'center';
-    }
-
-    // 페이지 로드 시 무작위 배경 이미지 설정
-    window.onload = function() {
-        setMinEndDate();
-        setRandomBackgroundImage(); // 페이지 로드 시 배경 이미지 변경
-    };
-</script>
 </head>
 <% String nickname = (String)session.getAttribute("nickname"); %>
 <body>
@@ -68,53 +32,16 @@
       <% } %>
   </nav>
 </header>
-
-    <!-- 바디 -->
-    <div class="Main_background_img">
-        <h1 class="h1-font">국내부터 해외까지 <br> 여행할때 에이콘스테이</h1>
+    <!-- 메인 -->
+    <div class="main-content">
+        <h1>회원탈퇴가 완료되었습니다.</h1>
+        <p>더 이상 에이콘스테이의 서비스를 이용하실 수 없습니다.
+            <br>서비스를 이용해주셔서 감사합니다.</p>
+        <p>탈퇴 취소는 불가능합니다.</p>
+        <a href="/MVC/main">메인 페이지로 돌아가기</a>
     </div>
 
-    <!-- 검색바 -->
-    <form action="/MVC/search" method="post">
-    <div class="search-bar">
-        <div class="search-input">
-            <input type="text" placeholder="여행지나 숙소를 검색해보세요." name="region">
-        </div>
-        <div class="search-dates">
-            <label for="start-date"><i class="calendar-icon"></i> 체크인</label>
-            <input type="date" id="start-date" onchange="setMinEndDate()" name="check_in">
-            <label for="end-date">체크아웃</label>
-            <input type="date" id="end-date" name="check_out">
-        </div>
-        <div class="search-guests">
-            <label for="guests"><i class="person-icon"></i> 인원</label>
-            <input type="number" id="guests" min="1" value="2" name="guest">
-        </div>
-        <button class="search-button" type="submit">검색</button>
-    </div>
-    </form>
-
-    <div class="event">
-        <h3> 베스트 숙소 </h3>
-        <!-- 이벤트 정보 영역 -->
-        <div class="info_box_container">
-            <div class="info_box"></div>
-            <div class="info_box"></div>
-            <div class="info_box"></div>
-        </div>
-    </div>
-
-    <div class="Best">
-        <h3>인기 숙소 추천</h3>
-        <!-- 인기 숙소 추천 정보 영역 -->
-        <div class="info_box_domestic">
-            <div class="info_box_d"></div>
-            <div class="info_box_d"></div>
-            <div class="info_box_d"></div>
-        </div>
-    </div> 
-
-    <!-- 푸터 영역 -->
+    <!-- 푸터 -->
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -168,7 +95,6 @@
             <p style="margin-top: 20px;"> COPYRIGHT(C) HBILAB. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
-
 </body>
 
-</html>
+</html> 
