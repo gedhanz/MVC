@@ -20,15 +20,15 @@
       </a>
   </div>
   <nav class="nav">
-  	  <%if(nickname != null) {%> <a href="/MVC/mypage"><%=nickname %>님 환영합니다</a> <%} %>
-  	  <% if(nickname == null){%>
-	  <a href="/MVC/register" class="heart-link"><i class="fas fa-heart"></i></a>
+       <%if(nickname != null) {%> <a href="/MVC/mypage"><%=nickname %>님 환영합니다</a> <%} %>
+       <% if(nickname == null){%>
+     <a href="/MVC/register" class="heart-link"><i class="fas fa-heart"></i></a>
       <% }%>
-  	  
-  	  <% if(nickname == null){%>
-	  <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
+       
+       <% if(nickname == null){%>
+     <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
       <% }else{ %>
-      <a href="/MVC/logout" class="mypage-button"><i class="fa-regular fa-user"></i> 로그아웃</a>
+      <a href="#" class="login-button"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</a>
       <% } %>
   </nav>
 </header>
@@ -51,8 +51,8 @@
                 <div class="info-box">
                     <div class="info-row">
                         <div class="id-item">
-                            <label>아이디</label>
-                            <input type="text" value="ID를 입력해주세요" name="id">
+                            <label>기존 비밀번호</label>
+                            <input type="text" placeholder="현재 비밀번호를 입력해주세요" name="pw">
                             <input type="hidden" name="dto">
                         </div>
 
@@ -60,14 +60,14 @@
                     <div class="info-row">
                         <div class="password-item">
                             <label>비밀번호</label>
-                            <input type="text" value="바꾸실 비밀번호를 입력해주세요" name="changePW">
+                            <input type="text" placeholder="새로운 비밀번호를 입력해주세요" name="changePW">
                         </div>
 
                     </div>
                     <div class="info-row">
                         <div class="passwordCheck-item">
                             <label>비밀번호 확인</label>
-                            <input type="text" value="비꾸실 비밀번호를 한번 더 입력해주세요" name="changePWcheck">
+                            <input type="text" placeholder="새로운 비밀번호를 재입력해주세요" name="changePWcheck">
                         </div>
 
                     </div>
