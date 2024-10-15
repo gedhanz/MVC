@@ -25,5 +25,18 @@ public class AcornStayChangePWServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=utf-8");
+		String id=req.getParameter("id");
+		String pw = req.getParameter("pw");
+		String changePw=req.getParameter("changePW");
+		
+		AcornStayChangePWServletDAO dao=new AcornStayChangePWServletDAO();
+		if (dao.pwCheck(id, pw)) {
+			dao.register(id, changePw);
+			resp.sendRedirect("/MVC/mypage");
+		}else {
+			resp.sendRedirect("/MVC/changePW");
+		}
+		
+		
 	}
 }

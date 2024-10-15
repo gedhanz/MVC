@@ -25,10 +25,10 @@
 
     // 랜덤 배경 이미지 변경 기능
     const images = [
-        "../image/mainphoto1.jpg",
-        "../image/mainphoto2.jpg",
-        "../image/mainphoto3.jpg",
-        "../image/mainphoto4.jpg"
+        "/resources/images/mainphoto1.jpg",
+        "/resources/images/mainphoto1.jpg",
+        "/resources/images/mainphoto1.jpg",
+        "/resources/images/mainphoto1.jpg"
     ];
 
     function setRandomBackgroundImage() {
@@ -64,7 +64,7 @@
   	  <% if(nickname == null){%>
 	  <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
       <% }else{ %>
-      <a href="/MVC/logout" class="mypage-button"><i class="fa-regular fa-user"></i> 로그아웃</a>
+      <a href="/MVC/logout" class="login-button"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</a>
       <% } %>
   </nav>
 </header>

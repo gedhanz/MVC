@@ -18,9 +18,9 @@ public class AcornStayMainServlet extends HttpServlet{
 		resp.setContentType("text/html;charset=utf-8");
 		
 		AcornStayAccommodationDAO dao = new AcornStayAccommodationDAO();
-		ArrayList<AcornStayAccommodationDTO> list = dao.getAllAccommodations();
+		ArrayList<AcornStayAccommodationDTO> list = dao.getAllAccommodations();   
 		
-		req.setAttribute("list", list);
+		req.setAttribute("list", list);    
 		
 		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp); 
 	}

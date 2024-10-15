@@ -314,4 +314,49 @@ footer {
     text-decoration: none; 
     font-weight: bold;
     color: #333; 
+}/* 구분선 스타일 */
+.divider {
+    border: 1px solid #e5e5e5;
+    margin: 40px 0;
+}
+
+/* 리뷰 쓰기 섹션 스타일 */
+.review-section {
+    margin-top: 40px;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-info p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.review-button {
+    background-color: #00aef0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.review-button:hover {
+    background-color: #9de3ff;
 }

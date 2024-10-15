@@ -105,34 +105,17 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
 }
-
-.mypage-button {
-  display: inline-flex;
-  align-items: center;
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
-  padding: 13px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  text-decoration: none;
-  display: none;
-}
-
-.mypage-button i {
-  margin-right: 5px;
-}
-
-.mypage-button:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-  color: black;
-}
 /* 검색바 영역 */
-
+.Main_background_img {
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+    padding: 230px;
+    color: white;
+}
 
 .search-bar {
-    background-color: white; 
+    background-color: white;
     border-radius: 10px;
     padding: 20px 40px;
     display: flex;

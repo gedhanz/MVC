@@ -306,7 +306,7 @@ section {
     -webkit-clip-path: inset(50%);
     clip-path: inset(50%);
     border: 0;
-}.css-1qumol3 .gc-thumbnail-type-seller-card:first-of-type {
+}.css-1qumol3 .gc-thumbnail-type-seller-card{
     padding-top: 0px;
     text-decoration: none;
 }.css-wels0m {
@@ -322,6 +322,8 @@ section {
     background-color: rgb(255, 255, 255);
     cursor: pointer;
     padding-top: 20px;
+    text-decoration: none;
+    color : black;
 }.css-gvoll6 {
     display: flex;
 }.css-7xiv94 {

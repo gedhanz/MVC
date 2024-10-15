@@ -1,3 +1,6 @@
+<%@page import="AcornStay.AcornStayReservationDAO"%>
+<%@page import="AcornStay.AcornStayReservationDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,7 +35,7 @@
       <% } %>
   </nav>
 </header>
-
+<%ArrayList<AcornStayReservationDTO> list = (ArrayList<AcornStayReservationDTO>)request.getAttribute("list"); %>
 <section class="mypage-section">
     <div class="mypage-container">
         <div class="sidebar">
@@ -47,25 +50,43 @@
             </div>
             <div class="reservation-history">
                 <p>고객님의 최근 예약 내역입니다.</p>
+                <%for (AcornStayReservationDTO dto : list)  {%>
+                <form action="/MVC/rvcheckDetail" method="post">
+                <input type="hidden" value="<%=dto.getAccommodation_id()%>" name="accId">
+                <input type="hidden" value="<%=dto.getId()%>" name="id">
+                <input type="hidden" value="<%=dto.getCheck_in().substring(0, 4) %>년 <%=dto.getCheck_in().substring(5, 7) %>월 <%=dto.getCheck_in().substring(8, 10) %>일" name="checkIn">
+                <input type="hidden" value="<%=dto.getCheck_out().substring(0, 4) %>년 <%=dto.getCheck_out().substring(5, 7) %>월 <%=dto.getCheck_out().substring(8, 10) %>일" name="checkOut">
                 <div class="reservation-list">
                     <div class="reservation-item">
                         <div class="reservation-info">
+                            <%AcornStayReservationDAO dao = new AcornStayReservationDAO();%>
+                            <p>숙소 이름: <%=dao.getaccName(dto.getAccommodation_id()) %></p>
+                            <p>체크인: <%=dto.getCheck_in().substring(0, 4) %>년 <%=dto.getCheck_in().substring(5, 7) %>월 <%=dto.getCheck_in().substring(8, 10) %>일</p>
+                            <p>체크아웃: <%=dto.getCheck_out().substring(0, 4) %>년 <%=dto.getCheck_out().substring(5, 7) %>월 <%=dto.getCheck_out().substring(8, 10) %>일</p>
+                        </div>
+                        <a href="/MVC/rvcheckDetail">
+                            <button class="details-button" >상세 보기</button>
+                        </a>
+                    </div>
+                </div>
+                </form>
+                <%} %>
+            </div>
+            <!-- 구분선 -->
+            <hr class="divider">
+
+            <!-- 리뷰 쓰기 섹션 -->
+            <div class="review-section">
+                <h1 style="color: black;">이용완료 및 예약취소</h1>
+                <div class="review-list">
+                    <div class="review-item">
+                        <div class="review-info">
                             <p>숙소 이름: ???</p>
                             <p>체크인: ****년 **월 **일</p>
                             <p>체크아웃: ****년 **월 **일</p>
                         </div>
-                        <a href="/MVC/rvcheckDetail">
-                            <button class="details-button">상세 보기</button>
-                        </a>
-                    </div>
-                    <div class="reservation-item">
-                        <div class="reservation-info">
-                            <p>숙소 이름: ????</p>
-                            <p>체크인: ****년 **월 **일</p>
-                            <p>체크아웃: ****년 **월 **일</p>
-                        </div>
-                        <a href="/MVC/rvcheckDetail">
-                            <button class="details-button">상세 보기</button>
+                        <a href="../html/리뷰페이지.html">
+                            <button class="review-button">리뷰 쓰기</button>
                         </a>
                     </div>
                 </div>

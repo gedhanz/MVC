@@ -46,27 +46,28 @@
             </div>
             <div class="user-info">
                 <h2>비밀번호 변경</h2>
-                <p>본인확인을 위해 아이디와 비밀번호를 입력해주세요.</p>
+               
                 <form action="/MVC/changePW" method="post">
                 <div class="info-box">
                     <div class="info-row">
                         <div class="id-item">
-                            <label>아이디</label>
-                            <input type="text" value="ID를 입력해주세요" name="id">
+                            <label>현재 비밀번호</label>
+                            <input type="text" placeholder="현재 비밀번호를 입력하세요" name="pw">
+                            <input type="hidden" name="id" value="<%=(String)session.getAttribute("id")%>">
                         </div>
 
                     </div>
                     <div class="info-row">
                         <div class="password-item">
                             <label>비밀번호</label>
-                            <input type="text" value="바꾸실 비밀번호를 입력해주세요" name="changePW">
+                            <input type="text" placeholder="바꾸실 비밀번호를 입력해주세요" name="changePW">
                         </div>
 
                     </div>
                     <div class="info-row">
                         <div class="passwordCheck-item">
                             <label>비밀번호 확인</label>
-                            <input type="text" value="비꾸실 비밀번호를 한번 더 입력해주세요" name="changePWcheck">
+                            <input type="text" placeholder="바꾸실 비밀번호를 한번 더 입력해주세요" name="changePWcheck">
                         </div>
 
                     </div>

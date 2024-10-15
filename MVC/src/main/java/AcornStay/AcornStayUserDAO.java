@@ -76,6 +76,25 @@ public class AcornStayUserDAO {
 		return nickname;
 	}
 	
+	public String findName(String id) {
+		Connection connection = dbCon();
+		String sql = "select name from users_mvc where nickname = ?";
+		String nickname = null;
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				nickname = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return nickname;
+	}
+	
 	public void deleteID(String id) {
 		Connection connection = dbCon();
 		String sql = "delete from users_mvc where user_id = ?";
@@ -90,6 +109,29 @@ public class AcornStayUserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public AcornStayUserDTO selectAll(String nickname) {
+		Connection connection = dbCon();
+		String sql = "select * from users_mvc where nickname = ?";
+		AcornStayUserDTO dto = new AcornStayUserDTO();
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setString(1, nickname);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				dto.setUser_id(rs.getString(1));
+				dto.setPassword(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setDate(rs.getString(4));
+				dto.setPhone(rs.getString(5));
+				dto.setNickname(rs.getString(6));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	
 }

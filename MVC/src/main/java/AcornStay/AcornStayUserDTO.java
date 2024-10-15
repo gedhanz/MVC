@@ -42,5 +42,23 @@ public class AcornStayUserDTO {
 	public String getNickname() {
 		return nickname;
 	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	
 }

@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@page import="AcornStay.AcornStayAccommodationImageDTO"%>
 <%@page import="AcornStay.AcornStayAccommodationDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -41,6 +42,10 @@
 AcornStayAccommodationDAO dao = new AcornStayAccommodationDAO();
 AcornStayAccommodationDTO dto = (AcornStayAccommodationDTO)request.getAttribute("dto");
 ArrayList<AcornStayAccommodationImageDTO> list = dao.getImages(dto.getId());
+String region = (String)request.getAttribute("region");
+Date checkIn = (Date)request.getAttribute("check_in");
+Date checkOut = (Date)request.getAttribute("check_out");
+int guest = (int)request.getAttribute("guest");
 %>
     <main>
       <section aria-label="숙소 상세 정보" class="h_info">
@@ -90,7 +95,7 @@ ArrayList<AcornStayAccommodationImageDTO> list = dao.getImages(dto.getId());
 
 
             <div class="price_container">
-                <span class="price"><%=dto.getPrice() %></span>
+                <span class="price"><%=String.format("%,d", dto.getPrice()) %></span>
                 <span class="won">원~</span>
             </div>
          </div>
@@ -102,11 +107,11 @@ ArrayList<AcornStayAccommodationImageDTO> list = dao.getImages(dto.getId());
             </div>
 
             <div class="info_box">
-				<%=dto.getRegion() %>
+				<%=dto.getDetail_location() %>
             </div>
 
             <div class="info_box">
-				<%=dto.getDetail_location() %>
+				<button class="useredit-button" onclick="location.href='/MVC/rv?id=<%=dto.getId()%>&region=<%= region %>&check_in=<%= checkIn %>&check_out=<%= checkOut %>&guest=<%= guest %>'">예약</button>
             </div>
           </div>
 

@@ -97,7 +97,7 @@ if(sortBy.equals("default")){
         </div>
         
         <% for(AcornStayAccommodationDTO dto : list) { %>
-        <a target="_blank" class="gc-thumbnail-type-seller-card css-wels0m" href="/MVC/detail?id=<%=dto.getId()%>">
+        <a target="_blank" class="gc-thumbnail-type-seller-card css-wels0m" href="/MVC/detail?id=<%=dto.getId()%>&region=<%= region %>&check_in=<%= checkIn %>&check_out=<%= checkOut %>&guest=<%= guest %>" >
           <div class="css-gvoll6">
             <div class="css-7xiv94">
               <div class="css-nl3cnv">
@@ -123,7 +123,7 @@ if(sortBy.equals("default")){
       			<div>
         			<div class="css-ukl1fa">
           				<div class="css-1dzt3ch">
-            				<div class="css-xgwoxj"><%=dto.getPrice() %>원</div>
+            				<div class="css-xgwoxj"><%=String.format("%,d", dto.getPrice()) %>원</div>
           				</div>
         			</div>
       			</div>
