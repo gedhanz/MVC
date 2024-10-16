@@ -1,0 +1,412 @@
+CREATE TABLE users_mvc (
+    user_id VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    phone_number VARCHAR(20) UNIQUE,
+    nickname VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE SEQUENCE accommodation_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TABLE accommodations_mvc (
+    accommodation_id NUMBER PRIMARY KEY,
+    region VARCHAR(50) NOT NULL,
+    detailed_location VARCHAR(255) NOT NULL,
+    price NUMBER NOT NULL,
+    average_rating FLOAT DEFAULT 0,
+    max_occupancy NUMBER NOT NULL,
+    accommodation_name VARCHAR(100) NOT NULL,
+    image VARCHAR(255)
+    
+);
+
+CREATE OR REPLACE TRIGGER trg_accommodations_id
+BEFORE INSERT ON accommodations_mvc
+FOR EACH ROW
+BEGIN
+  :NEW.accommodation_id := accommodation_seq.NEXTVAL;
+END;
+
+CREATE SEQUENCE review_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TABLE reviews_mvc (
+    review_id NUMBER PRIMARY KEY,
+    nickname VARCHAR(50),
+    accommodation_id NUMBER,
+    review_date DATE NOT NULL,
+    rating NUMBER CHECK (rating >= 1 AND rating <= 5),
+    review_text VARCHAR(255),
+    FOREIGN KEY (nickname) REFERENCES users_mvc(nickname),
+    FOREIGN KEY (accommodation_id) REFERENCES accommodations_mvc(accommodation_id)
+);
+
+CREATE OR REPLACE TRIGGER trg_reviews_id
+BEFORE INSERT ON reviews_mvc
+FOR EACH ROW
+BEGIN
+  :NEW.review_id := review_seq.NEXTVAL;
+END;
+
+CREATE SEQUENCE reservation_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TABLE reservations_mvc (
+    reservation_id NUMBER PRIMARY KEY,
+    accommodation_id NUMBER,
+    user_id VARCHAR(50),
+    nickname VARCHAR(50),
+    check_in DATE NOT NULL,
+    check_out DATE NOT NULL,
+    price NUMBER NOT NULL,
+    number_of_people NUMBER NOT NULL,
+    FOREIGN KEY (accommodation_id) REFERENCES accommodations_mvc(accommodation_id),
+    FOREIGN KEY (user_id) REFERENCES users_mvc(user_id),
+    FOREIGN KEY (nickname) REFERENCES users_mvc(nickname)
+);
+
+CREATE OR REPLACE TRIGGER trg_reservations_id
+BEFORE INSERT ON reservations_mvc
+FOR EACH ROW
+BEGIN
+  :NEW.reservation_id := reservation_seq.NEXTVAL;
+END;
+
+INSERT INTO accommodations_mvc VALUES (1, '경주', '경북 경주시 외동읍 입실리 98-14', 334880, 4.7, 4, '경주 스튜디오 오소','resources/images/kj1.jpg');
+INSERT INTO accommodations_mvc VALUES (2, '경주', '경북 경주시 서악동 665', 286200, 4.9, 6, '구릉연가','resources/images/kj2.jpg');
+INSERT INTO accommodations_mvc VALUES (3, '경주', '경북 경주시 천북면 화산리 881-11', 414400, 5, 4, '사색공간','resources/images/kj3.jpg');
+INSERT INTO accommodations_mvc VALUES (4, '경주', '경북 경주시 마동 174-1', 320000, 5, 6, '보리네뜰','resources/images/kj4.jpg');
+INSERT INTO accommodations_mvc VALUES (5, '경주', '경북 경주시 하동 747-1', 345000, 5, 8, '경주 디딤','resources/images/kj5.jpg');
+INSERT INTO accommodations_mvc VALUES (6, '부산', '부산 수영구 광안동 201-8', 129400, 4.9, 5, '다즐하우스','resources/images/bs1.jpg');
+INSERT INTO accommodations_mvc VALUES (7, '부산', '부산 수영구 광안동 201-8', 196600, 4.9, 10, '윈썸하우스','resources/images/bs2.jpg');
+INSERT INTO accommodations_mvc VALUES (8, '부산', '경남 거제시 장목면 율천리 446-2', 275000, 5, 4, '거제 띠아모','resources/images/bs3.jpg');
+INSERT INTO accommodations_mvc VALUES (9, '부산', '부산 기장군 일광읍 이천리 264-2', 135000, 5, 2, '일광이층집','resources/images/bs4.jpg');
+INSERT INTO accommodations_mvc VALUES (10, '부산', '부산 해운대구 송정동 199-12', 280000, 5, 7, '월하정인 월하방','resources/images/bs5.jpg');
+INSERT INTO accommodations_mvc VALUES (11, '서울', '서울 용산구 서계동 33-56', 369600, 4.9, 5, '쿤테라스','resources/images/su1.jpg');
+INSERT INTO accommodations_mvc VALUES (12, '서울', '경기 용인시 수지구 고기동 569', 672000, 4.7, 15, '고기동포레스트','resources/images/su2.jpg');
+INSERT INTO accommodations_mvc VALUES (13, '서울', '서울 동작구 사당동 1045-4', 247000, 5, 7, '사당 그린나래','resources/images/su3.jpg');
+INSERT INTO accommodations_mvc VALUES (14, '서울', '서울 마포구 성산동 254-21', 168000, 5, 7, '휘게 망원','resources/images/su4.jpg');
+INSERT INTO accommodations_mvc VALUES (15, '서울', '서울 은평구 진관동 190-1', 336000, 5, 5, '덕선재','resources/images/su5.jpg');
+INSERT INTO accommodations_mvc VALUES (16, '제주', '제주도 제주시 애월읍 신엄리 1700-1', 222200, 4.9, 4, '애월 올곧제주','resources/images/jj1.jpg');
+INSERT INTO accommodations_mvc VALUES (17, '제주', '제주특별자치도 제주시 구좌읍 김녕리 2468', 196600, 4.8, 4, '나즈온','resources/images/jj2.jpg');
+INSERT INTO accommodations_mvc VALUES (18, '제주', '제주특별자치도 제주시 애월읍 하가리 1468', 364600, 5, 4, '안심여관','resources/images/jj3.jpg');
+INSERT INTO accommodations_mvc VALUES (19, '제주', '제주특별자치도 제주시 한경면 저지리 3118-3', 196600, 5, 2, '저지맨션','resources/images/jj4.jpg');
+INSERT INTO accommodations_mvc VALUES (20, '제주', '제주도 제주시 화북일동 1619', 207800, 4.9, 3, '제주 푸른달','resources/images/jj5.jpg');
+
+commit;
+select * from accommodations_mvc;
+
+CREATE TABLE accommodation_images (
+    image_id NUMBER PRIMARY KEY,       -- 이미지 고유 ID
+    accommodation_id NUMBER,           -- 숙소 ID (외래키)
+    image_path VARCHAR(255) NOT NULL,  -- 이미지 경로 또는 파일명
+    FOREIGN KEY (accommodation_id) REFERENCES accommodations_mvc(accommodation_id)
+);
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (2, 1, 'resources/images/kj1-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (3, 1, 'resources/images/kj1-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (4, 1, 'resources/images/kj1-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (5, 1, 'resources/images/kj1-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (6, 1, 'resources/images/kj1-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (8, 2, 'resources/images/kj2-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (9, 2, 'resources/images/kj2-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (10, 2, 'resources/images/kj2-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (11, 2, 'resources/images/kj2-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (12, 2, 'resources/images/kj2-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (14, 3, 'resources/images/kj3-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (15, 3, 'resources/images/kj3-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (16, 3, 'resources/images/kj3-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (17, 3, 'resources/images/kj3-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (18, 3, 'resources/images/kj3-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (20, 4, 'resources/images/kj4-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (21, 4, 'resources/images/kj4-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (22, 4, 'resources/images/kj4-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (23, 4, 'resources/images/kj4-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (24, 4, 'resources/images/kj4-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (26, 5, 'resources/images/kj5-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (27, 5, 'resources/images/kj5-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (28, 5, 'resources/images/kj5-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (29, 5, 'resources/images/kj5-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (30, 5, 'resources/images/kj5-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (32, 6, 'resources/images/bs1-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (33, 6, 'resources/images/bs1-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (34, 6, 'resources/images/bs1-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (35, 6, 'resources/images/bs1-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (36, 6, 'resources/images/bs1-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (38, 7, 'resources/images/bs2-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (39, 7, 'resources/images/bs2-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (40, 7, 'resources/images/bs2-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (41, 7, 'resources/images/bs2-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (42, 7, 'resources/images/bs2-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (44, 8, 'resources/images/bs3-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (45, 8, 'resources/images/bs3-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (46, 8, 'resources/images/bs3-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (47, 8, 'resources/images/bs3-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (48, 8, 'resources/images/bs3-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (50, 9, 'resources/images/bs4-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (51, 9, 'resources/images/bs4-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (52, 9, 'resources/images/bs4-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (53, 9, 'resources/images/bs4-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (54, 9, 'resources/images/bs4-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (56, 10, 'resources/images/bs5-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (57, 10, 'resources/images/bs5-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (58, 10, 'resources/images/bs5-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (59, 10, 'resources/images/bs5-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (60, 10, 'resources/images/bs5-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (62, 11, 'resources/images/su1-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (63, 11, 'resources/images/su1-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (64, 11, 'resources/images/su1-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (65, 11, 'resources/images/su1-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (66, 11, 'resources/images/su1-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (68, 12, 'resources/images/su2-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (69, 12, 'resources/images/su2-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (70, 12, 'resources/images/su2-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (71, 12, 'resources/images/su2-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (72, 12, 'resources/images/su2-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (74, 13, 'resources/images/su3-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (75, 13, 'resources/images/su3-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (76, 13, 'resources/images/su3-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (77, 13, 'resources/images/su3-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (78, 13, 'resources/images/su3-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (80, 14, 'resources/images/su4-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (81, 14, 'resources/images/su4-2.jpg'); 
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (82, 14, 'resources/images/su4-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (83, 14, 'resources/images/su4-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (84, 14, 'resources/images/su4-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (86, 15, 'resources/images/su5-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (87, 15, 'resources/images/su5-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (88, 15, 'resources/images/su5-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (89, 15, 'resources/images/su5-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (90, 15, 'resources/images/su5-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (92, 16, 'resources/images/jj1-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (93, 16, 'resources/images/jj1-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (94, 16, 'resources/images/jj1-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (95, 16, 'resources/images/jj1-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (96, 16, 'resources/images/jj1-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (98, 17, 'resources/images/jj2-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (99, 17, 'resources/images/jj2-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (100, 17, 'resources/images/jj2-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (101, 17, 'resources/images/jj2-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (102, 17, 'resources/images/jj2-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (104, 18, 'resources/images/jj3-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (105, 18, 'resources/images/jj3-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (106, 18, 'resources/images/jj3-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (107, 18, 'resources/images/jj3-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (108, 18, 'resources/images/jj3-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (110, 19, 'resources/images/jj4-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (111, 19, 'resources/images/jj4-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (112, 19, 'resources/images/jj4-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (113, 19, 'resources/images/jj4-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (114, 19, 'resources/images/jj4-5.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (116, 20, 'resources/images/jj5-1.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (117, 20, 'resources/images/jj5-2.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (118, 20, 'resources/images/jj5-3.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (119, 20, 'resources/images/jj5-4.jpg');
+
+INSERT INTO accommodation_images (image_id, accommodation_id, image_path)
+VALUES (120, 20, 'resources/images/jj5-5.jpg');
+
+commit;
+select * from accommodation_images ;
