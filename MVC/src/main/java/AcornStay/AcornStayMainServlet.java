@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/main")
 public class AcornStayMainServlet extends HttpServlet{
@@ -18,9 +19,10 @@ public class AcornStayMainServlet extends HttpServlet{
 		resp.setContentType("text/html;charset=utf-8");
 		
 		AcornStayAccommodationDAO dao = new AcornStayAccommodationDAO();
-		ArrayList<AcornStayAccommodationDTO> list = dao.getAllAccommodations();   
+		ArrayList<AcornStayAccommodationDTO> list = dao.getAllAccommodations(); 
+		HttpSession session = req.getSession();
 		
-		req.setAttribute("list", list);    
+		session.setAttribute("list", list)  ;
 		
 		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp); 
 	}

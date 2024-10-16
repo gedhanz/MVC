@@ -25,19 +25,25 @@
 
     // 랜덤 배경 이미지 변경 기능
     const images = [
-        "/resources/images/mainphoto1.jpg",
-        "/resources/images/mainphoto1.jpg",
-        "/resources/images/mainphoto1.jpg",
-        "/resources/images/mainphoto1.jpg"
+        "/MVC/resources/images/mainphoto1.jpg",
+        "/MVC/resources/images/mainphoto2.jpg",
+        "/MVC/resources/images/mainphoto3.jpg",
+        "/MVC/resources/images/mainphoto4.jpg"
     ];
-
+    
     function setRandomBackgroundImage() {
         const randomIndex = Math.floor(Math.random() * images.length);
+        
+        console.log(randomIndex); 
+        
         const mainBackground = document.querySelector('.Main_background_img');
-        mainBackground.style.backgroundImage = `url('${images[randomIndex]}')`;
+        console.log(mainBackground); 
+        
+        mainBackground.style.backgroundImage = `url('\${images[randomIndex]}')`;
         mainBackground.style.backgroundSize = 'cover';
         mainBackground.style.backgroundPosition = 'center';
     }
+
 
     // 페이지 로드 시 무작위 배경 이미지 설정
     window.onload = function() {

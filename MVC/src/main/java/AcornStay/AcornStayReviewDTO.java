@@ -1,13 +1,15 @@
 package AcornStay;
 
+import java.sql.Date;
+
 public class AcornStayReviewDTO {
 	int id;
 	String nickname;
 	int accommodation_id;
-	String review_date;
-	int rating;
+	Date review_date;
+	float rating;
 	String review_text;
-	public AcornStayReviewDTO(int id, String nickname, int accommodation_id, String review_date, int rating,
+	public AcornStayReviewDTO(int id, String nickname, int accommodation_id, Date review_date, float rating,
 			String review_text) {
 		super();
 		this.id = id;
@@ -40,11 +42,11 @@ public class AcornStayReviewDTO {
 		return accommodation_id;
 	}
 
-	public String getReview_date() {
+	public Date getReview_date() {
 		return review_date;
 	}
 
-	public int getRating() {
+	public float getRating() {
 		return rating;
 	}
 

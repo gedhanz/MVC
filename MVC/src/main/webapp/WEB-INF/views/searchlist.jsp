@@ -16,16 +16,16 @@
     
 </head>
 <% String nickname = (String)session.getAttribute("nickname"); %>
-<!-- 헤더 영역 -->
-<header class="header">
+<body>
+    <header class="header">
   <div class="logo">
-      <a href="/MVC/main"> 
+      <a href="/MVC/main">
           <img src="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" alt="Acorn Stay Logo">
           <span class="logo-text"><span style="color: #1a1d60d4;">Acorn</span>Stay</span>
       </a>
   </div>
   <nav class="nav">
-  	  <%if(nickname != null) {%> <%=nickname %>님 환영합니다 <%} %>
+  	  <%if(nickname != null) {%> <a href="/MVC/mypage"><%=nickname %>님 환영합니다</a> <%} %>
   	  <% if(nickname == null){%>
 	  <a href="/MVC/register" class="heart-link"><i class="fas fa-heart"></i></a>
       <% }%>
@@ -33,7 +33,7 @@
   	  <% if(nickname == null){%>
 	  <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
       <% }else{ %>
-      <a href="/MVC/logout" class="mypage-button"><i class="fa-regular fa-user"></i> 로그아웃</a>
+      <a href="/MVC/logout" class="login-button"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</a>
       <% } %>
   </nav>
 </header>
@@ -97,7 +97,7 @@ if(sortBy.equals("default")){
         </div>
         
         <% for(AcornStayAccommodationDTO dto : list) { %>
-        <a target="_blank" class="gc-thumbnail-type-seller-card css-wels0m" href="/MVC/detail?id=<%=dto.getId()%>&region=<%= region %>&check_in=<%= checkIn %>&check_out=<%= checkOut %>&guest=<%= guest %>" >
+        <a class="gc-thumbnail-type-seller-card css-wels0m" href="/MVC/detail?id=<%=dto.getId()%>&region=<%= region %>&check_in=<%= checkIn %>&check_out=<%= checkOut %>&guest=<%= guest %>" >
           <div class="css-gvoll6">
             <div class="css-7xiv94">
               <div class="css-nl3cnv">

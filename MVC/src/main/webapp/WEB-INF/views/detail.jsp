@@ -17,8 +17,8 @@
 </head>
 <body>
 <% String nickname = (String)session.getAttribute("nickname"); %>
-<!-- 헤더 영역 -->
-<header class="header">
+<body>
+    <header class="header">
   <div class="logo">
       <a href="/MVC/main">
           <img src="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" alt="Acorn Stay Logo">
@@ -26,7 +26,7 @@
       </a>
   </div>
   <nav class="nav">
-  	  <%if(nickname != null) {%> <%=nickname %>님 환영합니다 <%} %>
+  	  <%if(nickname != null) {%> <a href="/MVC/mypage"><%=nickname %>님 환영합니다</a> <%} %>
   	  <% if(nickname == null){%>
 	  <a href="/MVC/register" class="heart-link"><i class="fas fa-heart"></i></a>
       <% }%>
@@ -34,7 +34,7 @@
   	  <% if(nickname == null){%>
 	  <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
       <% }else{ %>
-      <a href="/MVC/logout" class="mypage-button"><i class="fa-regular fa-user"></i> 로그아웃</a>
+      <a href="/MVC/logout" class="login-button"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</a>
       <% } %>
   </nav>
 </header>

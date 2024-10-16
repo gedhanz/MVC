@@ -16,7 +16,8 @@ public class AcornStayLogoutServlet extends HttpServlet{
 		
         HttpSession session = req.getSession(false); 
         if (session != null) {
-        	session.invalidate();
+        	session.removeAttribute("nickname");
+        	session.removeAttribute("id");
         }
         
         resp.sendRedirect("/MVC/main");

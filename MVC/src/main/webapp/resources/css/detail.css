@@ -101,15 +101,17 @@ img{
     color: rgb(131, 131, 131);
 }
 
+/* 수정 이름길이 */
 .name_n h1{
-    width: 200px;
+    width: 400px;
     height: 40px;
     color: rgb(51, 51, 51);
     margin: 0;
 }
 
+/* width 수정 */
 .price_container{
-    width: 130px;
+    width: 160px;
     height: 40px;
     float: right;
     position: relative;
@@ -140,12 +142,43 @@ img{
     margin-top: 40px;
 }
 
+/* 수정 패딩추가 여기부터 ~ */
 .info_box{
     border: 1px solid rgb(226, 226, 226);
     width: 33%;
     height: 135px;
     border-radius: 10px;
+    padding: 30px;
 }
+
+.info_count_top{
+    /* border: 1px solid black; */
+    font-weight: bold;
+    font-size: 24px;
+    color: rgb(51, 51, 51);
+}
+
+.info_count_bot{
+    margin-top: 10px;
+    /* border: 1px solid black; */
+    font-size: 16px;
+    color: rgb(44, 44, 44);
+}
+
+.info_address_top{
+    /* border: 1px solid black; */
+    font-weight: bold;
+    font-size: 24px;
+    color: rgb(51, 51, 51);
+}
+
+.info_address_bot{
+    margin-top: 10px;
+    /* border: 1px solid black; */
+    font-size: 16px;
+    color: rgb(44, 44, 44);
+}
+/* ~ 여기까지 수정 */
 
 main {
     margin-top: 76px;
@@ -414,7 +447,10 @@ footer {
     text-decoration: none; 
     font-weight: bold;
     color: #333; 
-}.useredit-button {
+}
+
+/* 예약버튼 수정부분 */
+.useredit-button {
     background-color: #00aef0;
     color: white;
     padding: 7px 10px;
@@ -422,6 +458,23 @@ footer {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-}.useredit-button:hover{
+    width: 180px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 20px;
+    
+}
+
+.useredit-button:hover{
     background-color: #9de3ff;
+}
+
+.useredit-button-box{
+    /* border: 1px solid rgb(226, 226, 226); */
+    width: 33%;
+    height: 135px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
 }

@@ -65,7 +65,7 @@
                             <p>체크아웃: <%=dto.getCheck_out().substring(0, 4) %>년 <%=dto.getCheck_out().substring(5, 7) %>월 <%=dto.getCheck_out().substring(8, 10) %>일</p>
                         </div>
                         <a href="/MVC/rvcheckDetail">
-                            <button class="details-button" >상세 보기</button>
+                            <button class="details-button" type="submit">상세 보기</button>
                         </a>
                     </div>
                 </div>
@@ -76,21 +76,29 @@
             <hr class="divider">
 
             <!-- 리뷰 쓰기 섹션 -->
+            <%for (AcornStayReservationDTO dto : list)  {%>
+            <form action="/MVC/review" method="post">
+            <input type="hidden" value="<%=dto.getAccommodation_id()%>" name="accId">
+            <input type="hidden" value="<%=dto.getCheck_in()%>" name="checkIn">
+            <input type="hidden" value="<%=dto.getCheck_out()%>" name="checkOut">
             <div class="review-section">
                 <h1 style="color: black;">이용완료 및 예약취소</h1>
                 <div class="review-list">
                     <div class="review-item">
                         <div class="review-info">
-                            <p>숙소 이름: ???</p>
-                            <p>체크인: ****년 **월 **일</p>
-                            <p>체크아웃: ****년 **월 **일</p>
+                            <%AcornStayReservationDAO dao = new AcornStayReservationDAO();%>
+                            <p>숙소 이름: <%=dao.getaccName(dto.getAccommodation_id()) %></p>
+                            <p>체크인: <%=dto.getCheck_in().substring(0, 4) %>년 <%=dto.getCheck_in().substring(5, 7) %>월 <%=dto.getCheck_in().substring(8, 10) %>일</p>
+                            <p>체크아웃: <%=dto.getCheck_out().substring(0, 4) %>년 <%=dto.getCheck_out().substring(5, 7) %>월 <%=dto.getCheck_out().substring(8, 10) %>일</p>
                         </div>
-                        <a href="../html/리뷰페이지.html">
+                        <a href="/MVC/review">
                             <button class="review-button">리뷰 쓰기</button>
                         </a>
                     </div>
                 </div>
             </div>
+            </form>
+            <%} %>
         </div>
     </div>
 </section>
