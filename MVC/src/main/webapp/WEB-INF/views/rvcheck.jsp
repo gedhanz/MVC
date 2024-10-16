@@ -76,16 +76,19 @@
             <hr class="divider">
 
             <!-- 리뷰 쓰기 섹션 -->
-            <%for (AcornStayReservationDTO dto : list)  {%>
-            <form action="/MVC/review" method="post">
-            <input type="hidden" value="<%=dto.getAccommodation_id()%>" name="accId">
-            <input type="hidden" value="<%=dto.getCheck_in()%>" name="checkIn">
-            <input type="hidden" value="<%=dto.getCheck_out()%>" name="checkOut">
+            
+            
+            
             <div class="review-section">
                 <h1 style="color: black;">이용완료 및 예약취소</h1>
+                <%for (AcornStayReservationDTO dto : list)  {%>
+                <form action="/MVC/review" method="post">
                 <div class="review-list">
                     <div class="review-item">
                         <div class="review-info">
+                        	<input type="hidden" value="<%=dto.getAccommodation_id()%>" name="accId">
+            				<input type="hidden" value="<%=dto.getCheck_in()%>" name="checkIn">
+            				<input type="hidden" value="<%=dto.getCheck_out()%>" name="checkOut">
                             <%AcornStayReservationDAO dao = new AcornStayReservationDAO();%>
                             <p>숙소 이름: <%=dao.getaccName(dto.getAccommodation_id()) %></p>
                             <p>체크인: <%=dto.getCheck_in().substring(0, 4) %>년 <%=dto.getCheck_in().substring(5, 7) %>월 <%=dto.getCheck_in().substring(8, 10) %>일</p>
@@ -96,9 +99,9 @@
                         </a>
                     </div>
                 </div>
+                </form>
+                <%} %>
             </div>
-            </form>
-            <%} %>
         </div>
     </div>
 </section>
