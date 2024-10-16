@@ -22,7 +22,7 @@ public class AcornStayMainServlet extends HttpServlet{
 		ArrayList<AcornStayAccommodationDTO> list = dao.getAllAccommodations(); 
 		HttpSession session = req.getSession();
 		
-		session.setAttribute("list", list);
+		session.setAttribute("list", list); 
 		
 		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp); 
 	}

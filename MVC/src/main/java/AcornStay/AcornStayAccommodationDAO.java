@@ -160,4 +160,54 @@ public class AcornStayAccommodationDAO {
 		}
 		return list;
 	}
+	
+	public ArrayList<Float> getAllRating(int id) {
+		Connection connection = dbCon();
+		String sql = "select rating from reviews_mvc where accommodation_id = ?";
+		ArrayList<Float> list = new ArrayList<Float>();
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				list.add(rs.getFloat(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public float getAccRating(int id) {
+		Connection connection = dbCon();
+		String sql = "select average_rating from accommodations_mvc where accommodation_id = ?";
+		float result = 0;
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				result = rs.getFloat(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public void average_rating(double rating, int id) {
+		Connection connection = dbCon();
+		String sql = "UPDATE accommodations_mvc SET average_rating = ? WHERE accommodation_id = ?";
+		try {
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setDouble(1, rating);
+			pst.setInt(2, id);
+			int result = pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
