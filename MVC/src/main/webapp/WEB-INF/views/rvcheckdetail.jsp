@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://i.pinimg.com/280x280_RS/12/5c/15/125c15498a72c53a784b7476ce8c5a22.jpg" type="image/png">
 </head>
-<% String nickname = (String)session.getAttribute("nickname"); %>
+<%
+String nickname = (String)session.getAttribute("nickname");
+%>
 <body>
     <header class="header">
   <div class="logo">
@@ -23,16 +25,30 @@
       </a>
   </div>
   <nav class="nav">
-  	  <%if(nickname != null) {%> <a href="/MVC/mypage"><%=nickname %>님 환영합니다</a> <%} %>
-  	  <% if(nickname == null){%>
+  	  <%
+  	  if(nickname != null) {
+  	  %> <a href="/MVC/mypage"><%=nickname%>님 환영합니다</a> <%
+ }
+ %>
+  	  <%
+  	  if(nickname == null){
+  	  %>
 	  <a href="/MVC/register" class="heart-link"><i class="fas fa-heart"></i></a>
-      <% }%>
+      <%
+      }
+      %>
   	  
-  	  <% if(nickname == null){%>
+  	  <%
+  	    	  if(nickname == null){
+  	    	  %>
 	  <a href="/MVC/login" class="login-button"><i class="fa-regular fa-user"></i>로그인</a>
-      <% }else{ %>
+      <%
+      }else{
+      %>
       <a href="/MVC/logout" class="mypage-button"><i class="fa-regular fa-user"></i> 로그아웃</a>
-      <% } %>
+      <%
+      }
+      %>
   </nav>
 </header>
 <%
@@ -41,15 +57,15 @@ int acc_id = (int)request.getAttribute("acc_id");
 String checkIn = (String)request.getAttribute("checkIn");
 String checkOut = (String)request.getAttribute("checkOut");
 AcornStayAccommodationDAO dao = new AcornStayAccommodationDAO();
-AcornStayUserDAO uDao = new AcornStayUserDAO();
+AcornStay.AcornStayUserDAO uDao = new AcornStay.AcornStayUserDAO();
 AcornStayAccommodationDTO dto = dao.getAccommodation(acc_id);
 %>
 <section class="mypage-section">
     <div class="mypage-container">
         <div class="sidebar">
             <ul>
-                <li><a href="/MVC/mypage"class="active">내 정보</a></li>
-                <li><a href="/MVC/rvcheck">예약 내역</a></li>
+                <li><a href="/MVC/mypage">내 정보</a></li>
+                <li><a href="/MVC/rvcheck"class="active">예약 내역</a></li>
             </ul>
         </div>
         <div class="content">

@@ -74,7 +74,7 @@
       <% } %>
   </nav>
 </header>
-
+<%ArrayList<AcornStayAccommodationDTO> list = (ArrayList<AcornStayAccommodationDTO>)session.getAttribute("list"); %>
     <!-- 바디 -->
     <div class="Main_background_img">
         <h1 class="h1-font">국내부터 해외까지 <br> 여행할때 에이콘스테이</h1>
@@ -104,9 +104,15 @@
         <h3> 베스트 숙소 </h3>
         <!-- 이벤트 정보 영역 -->
         <div class="info_box_container">
-            <div class="info_box"></div>
-            <div class="info_box"></div>
-            <div class="info_box"></div>
+            <div class="info_box">
+            	<img alt="" sizes="100vw" src="<%=list.get(0).getImage() %>" decoding="async" data-nimg="fill" class="thumbnail-image desktop:hover:bg-backgroundOverlayDarkInactive" loading="lazy" style="height: 100%; width: 100%; inset: 0px; color: transparent;">
+            </div>
+            <div class="info_box">
+            	<img alt="" sizes="100vw" src="<%=list.get(4).getImage() %>" decoding="async" data-nimg="fill" class="thumbnail-image desktop:hover:bg-backgroundOverlayDarkInactive" loading="lazy" style="height: 100%; width: 100%; inset: 0px; color: transparent;">
+            </div>
+            <div class="info_box">
+            	<img alt="" sizes="100vw" src="<%=list.get(8).getImage() %>" decoding="async" data-nimg="fill" class="thumbnail-image desktop:hover:bg-backgroundOverlayDarkInactive" loading="lazy" style="height: 100%; width: 100%; inset: 0px; color: transparent;">
+            </div>
         </div>
     </div>
 
@@ -114,9 +120,15 @@
         <h3>인기 숙소 추천</h3>
         <!-- 인기 숙소 추천 정보 영역 -->
         <div class="info_box_domestic">
-            <div class="info_box_d"></div>
-            <div class="info_box_d"></div>
-            <div class="info_box_d"></div>
+            <div class="info_box_d">
+            	<img alt="" sizes="100vw" src="<%=list.get(11).getImage() %>" decoding="async" data-nimg="fill" class="thumbnail-image desktop:hover:bg-backgroundOverlayDarkInactive" loading="lazy" style="height: 100%; width: 100%; inset: 0px; color: transparent;">
+            </div>
+            <div class="info_box_d">
+            	<img alt="" sizes="100vw" src="<%=list.get(14).getImage() %>" decoding="async" data-nimg="fill" class="thumbnail-image desktop:hover:bg-backgroundOverlayDarkInactive" loading="lazy" style="height: 100%; width: 100%; inset: 0px; color: transparent;">
+            </div>
+            <div class="info_box_d">
+            	<img alt="" sizes="100vw" src="<%=list.get(18).getImage() %>" decoding="async" data-nimg="fill" class="thumbnail-image desktop:hover:bg-backgroundOverlayDarkInactive" loading="lazy" style="height: 100%; width: 100%; inset: 0px; color: transparent;">
+            </div>
         </div>
     </div> 
 

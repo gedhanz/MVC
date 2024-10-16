@@ -1,3 +1,5 @@
+<%@page import="AcornStay.AcornStayReviewDTO"%>
+<%@page import="AcornStay.AcornStayReviewDAO"%>
 <%@page import="java.sql.Date"%>
 <%@page import="AcornStay.AcornStayAccommodationImageDTO"%>
 <%@page import="AcornStay.AcornStayAccommodationDTO"%>
@@ -42,6 +44,8 @@
 AcornStayAccommodationDAO dao = new AcornStayAccommodationDAO();
 AcornStayAccommodationDTO dto = (AcornStayAccommodationDTO)request.getAttribute("dto");
 ArrayList<AcornStayAccommodationImageDTO> list = dao.getImages(dto.getId());
+AcornStayReviewDAO rDao = new AcornStayReviewDAO();
+ArrayList<AcornStayReviewDTO> list1 = rDao.getReview(dto.getId());
 String region = (String)request.getAttribute("region");
 Date checkIn = (Date)request.getAttribute("check_in");
 Date checkOut = (Date)request.getAttribute("check_out");
@@ -102,47 +106,91 @@ int guest = (int)request.getAttribute("guest");
 
          <!-- 기타정보 영역 -->
           <div class="info_box_container">
-            <div class="info_box">
-				<%=dto.getMax_occupancy() %>
+                        <div class="info_box">
+                          <div class="info_count_top">
+                            최대인원
+                          </div>
+
+                          <div class="info_count_bot">
+                            <%=dto.getMax_occupancy() %>
+                          </div>
+                        </div>
+
+
+                        <div class="info_box">
+                          <div class="info_address_top">
+                            상세 위치
+                          </div>
+                          <div class="info_address_bot">
+                            <%=dto.getDetail_location() %>
+                          </div>
+                        </div>
+
+                        <!-- 수정 useredit-button-box , useredit-button -->
+                        <div class="useredit-button-box">
+                          <button class="useredit-button"
+                            onclick="location.href='/MVC/rv?id=<%=dto.getId()%>&region=<%= region %>&check_in=<%= checkIn %>&check_out=<%= checkOut %>&guest=<%= guest %>'">숙박
+                            예약</button>
+                        </div>
+                      </div>
+
+          <!-- 리뷰 영역 -->
+        <section aria-label="리뷰" id="review">
+          <div class="review_container">
+            <div class="review_box">
+              <div class="review_rating">
+                <div class="review_star">
+                  <img
+                    src="https://e7.pngegg.com/pngimages/914/747/png-clipart-star-star.png"
+                  />
+                </div>
+                <h2 class="review_r">
+                  리뷰 점수 <%=dto.getRate() %>
+                </h2>
+              </div>
+
+              <span class="review_count"> 
+                <%=list1.size() %>개의 리뷰
+              </span>
             </div>
 
-            <div class="info_box">
-				<%=dto.getDetail_location() %>
-            </div>
-
-            <div class="info_box">
-				<button class="useredit-button" onclick="location.href='/MVC/rv?id=<%=dto.getId()%>&region=<%= region %>&check_in=<%= checkIn %>&check_out=<%= checkOut %>&guest=<%= guest %>'">예약</button>
+            <div class="review_array">
+              추천순
             </div>
           </div>
 
-          <!-- 리뷰 영역 -->
-           <section aria-label="리뷰" id="review">
-                <div class="review_container">
-                    <div class="review_box">
-                        <div class="review_rating">
-                            <div class="review_star">
-                            <img src="https://e7.pngegg.com/pngimages/914/747/png-clipart-star-star.png">
-                            </div>
-                            <h2 class="review_r">
-                                 리뷰 점수 <%=dto.getRate() %>
-                            </h2>
-                        </div>
-    
-                        <span class="review_count">
-                            10,536명 평가 ・ 10,536개 리뷰
-                        </span>
-                    </div>
+          <hr />
 
-                    <div class="review_array">
-                        추천순
-                    </div>
+          <!-- 리뷰 내용 -->
+          <%for(AcornStayReviewDTO dto3 : list1) {%>
+          <div class="review_bottom_container">
+            <div class="review_bottom_box">
+              <div class="review_in_box">
+                <div class="reviewer_info">
+                  <div class="review_cus_img"></div>
+                  <div class="review_cus_info_box">
+                    <p class="review_nickname">
+                      <%=dto3.getNickname() %>
+                    </p>
+                  </div>
                 </div>
 
-                <hr>
+                <div class="review_textbox">
+                  <div class="review_star_rate">
+                    <span>별점: <%=dto3.getRating() %>점</span>
+                  </div>
+                  <div class="review_cus_review">
+                    <p>
+                      <%=dto3.getReview_text() %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%} %>
+        </section>
 
-                <!-- 리뷰 내용 -->
-
-           </section>
 
       </section>
     </main>

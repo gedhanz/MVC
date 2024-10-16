@@ -482,13 +482,13 @@ main{
 }
 
 .price_div_d2{
-  width: 90px;
+  width: 100px;
   height: 25px;
 }
 
 .price_div_d2 p{
   margin: 0;
-  font-size: 22px;
+  font-size: 18px;
   color: rgb(255, 95, 95);
   font-weight: bold;
 }
@@ -519,6 +519,7 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
 }
 
 .payment_btn span{

@@ -1,8 +1,8 @@
+<%@page import="AcornStay.AcornStayUserDTO"%>
+<%@page import="AcornStay.AcornStayUserDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="AcornStay.AcornStayUserDAO"%>
-<%@page import="AcornStay.AcornStayUserDTO"%>
 <%@page import="AcornStay.AcornStayAccommodationImageDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="AcornStay.AcornStayAccommodationDTO"%>
@@ -140,7 +140,7 @@ long since = TimeUnit.MILLISECONDS.toDays(diff);
                                 <tbody>
                                     <tr>
                                         <td class="td_1">객실</td>
-                                        <td class="td_2">Early 체크인 (숙박 2인 무료조식, 전 객실 OTT 서비스 지원, 호텔토랑 룸서비스)</td>
+                                        <td class="td_2">Early 체크인</td>
                                     </tr>
                                     <tr>
                                         <td class="td_1">일정</td>

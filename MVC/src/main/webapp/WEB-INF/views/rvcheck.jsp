@@ -40,8 +40,8 @@
     <div class="mypage-container">
         <div class="sidebar">
             <ul>
-                <li><a href="/MVC/mypage"class="active">내 정보</a></li>
-                <li><a href="/MVC/rvcheck">예약 내역</a></li>
+                <li><a href="/MVC/mypage">내 정보</a></li>
+                <li><a href="/MVC/rvcheck"class="active">예약 내역</a></li>
             </ul>
         </div>
         <div class="content">

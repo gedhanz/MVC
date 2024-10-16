@@ -35,14 +35,12 @@ public class AcornStayReservationServlet extends HttpServlet{
 	    HttpSession session = req.getSession();
 	    String user_id = (String) session.getAttribute("id");
 	    
-	    req.getRequestDispatcher("WEB-INF/views/rv.jsp").forward(req, resp);
-	    /*
 	    if (user_id != null) {
 	    	req.getRequestDispatcher("WEB-INF/views/rv.jsp").forward(req, resp);
 		}else {
 			req.getRequestDispatcher("WEB-INF/views/login.jsp").forward(req, resp);
 		}
-		*/
+		
 		
 	}
 	
